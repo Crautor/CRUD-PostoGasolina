@@ -2,59 +2,54 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-void CadastrarFuncionario(int *contadorFuncionario, struct Funcionario **funcionarios) {
-    (*contadorFuncionario)++;
+void CadastrarFuncionario(int *contadorFuncionario, struct Funcionario *funcionario){
+  
+   if (*contadorFuncionario>1)
+   {
+    funcionario = (struct Funcionario*) realloc (funcionario,*contadorFuncionario * sizeof(struct Funcionario));
     
-    *funcionarios = realloc(*funcionarios, (*contadorFuncionario) * sizeof(struct Funcionario));
-    if (*funcionarios == NULL) {
-        // Lida com erro de alocação de memória
-        exit(1);
-    }
-    
-    struct Funcionario *novoFuncionario = &(*funcionarios)[*contadorFuncionario - 1];
-    
-    novoFuncionario->ID = *contadorFuncionario;
+   }
    
-    // Nome
+    funcionario[*contadorFuncionario].ID = *contadorFuncionario + 1;
+   
+    //Nome  
     printf("Digite o nome do Funcionario: ");
     fflush(stdin);
-    fgets(novoFuncionario->Nome, sizeof(novoFuncionario->Nome), stdin);
-    novoFuncionario->Nome[strcspn(novoFuncionario->Nome, "\n")] = '\0';
+    gets(funcionario[*contadorFuncionario].Nome);       
     
-    // Turno
+    //Turno
     printf("TURNOS: \n1 - Matutino\n2 - Vespertino\n3 - Noturno\n");
-    printf("Informe o Turno de Trabalho: ");
-    scanf("%d", &novoFuncionario->Turno);
+    printf("informe o Turno de Trabalho:");
+    scanf("%i",&funcionario[*contadorFuncionario].Turno);
     
-    // Função
-    printf("Informe a funcao do funcionario: ");
+    //Função
+    printf("Informe a funcao do funcionario:");
     fflush(stdin);
-    fgets(novoFuncionario->Funcao, sizeof(novoFuncionario->Funcao), stdin);
-    novoFuncionario->Funcao[strcspn(novoFuncionario->Funcao, "\n")] = '\0';
+    gets(funcionario[*contadorFuncionario].Funcao); 
+      
+
 }
 
-void ExibirFuncionarios(int contadorFuncionario, struct Funcionario *funcionarios) {
-    for (int i = 0; i < contadorFuncionario; i++) {
-        printf("\nIndice: %d\n", funcionarios[i].ID);
-        printf("Nome: %s\n", funcionarios[i].Nome);
-        if (funcionarios[i].Turno == 1){
+void ExibirFuncionario(int *contadorFuncionario, struct Funcionario *funcionario){
+    for (int i = 0; i < (*contadorFuncionario); i++){
+        printf("\nIndice: %d\n",funcionario[i].ID);
+        printf("Nome: %s\n",funcionario[i].Nome);
+        if (funcionario[i].Turno==1){
             printf("Turno: Matutino\n");
         }
-        if (funcionarios[i].Turno == 2){
+        if (funcionario[i].Turno==2){
             printf("Turno: Vespertino\n");
         }
-        if (funcionarios[i].Turno == 3){
+        if (funcionario[i].Turno==3){
             printf("Turno: Noturno\n");
         }
-        if(funcionarios[i].Turno != 1 && funcionarios[i].Turno != 2 && funcionarios[i].Turno != 3){
-            printf("Turno: Nao Encontrado\n");
+        if (funcionario[i].Turno!=1 && funcionario[i].Turno!=2 && funcionario[i].Turno!=3){
+            printf("Turno: Nao encontrado\n");
         }
-        
-        printf("Funcao: %s\n", funcionarios[i].Funcao);
+        printf("Funcao: %s\n",funcionario[i].Funcao);
     }
+    
 }
-
 
 void Continuar(int *continuar){
     printf("\nDeseja Continuar?\n");

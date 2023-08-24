@@ -1,6 +1,3 @@
-#ifndef STRUCTS_H
-#define STRUCTS_H
-
 struct Funcionario {
     int ID;
     char Nome[50];
@@ -8,4 +5,3 @@ struct Funcionario {
     char Funcao[20];
 };
 
-#endif
