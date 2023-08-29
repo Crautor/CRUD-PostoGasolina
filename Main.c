@@ -24,6 +24,10 @@ int main(){
                         Continuar(&continuar);
                     } while (continuar==1);
                 }
+                if (escolha==2){
+                    EditarFuncionario(&contFunci,funcionario);
+                }
+                
                 if (escolha==3)
                 {
                     ExibirFuncionario(&contFunci,funcionario);
