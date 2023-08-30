@@ -76,8 +76,24 @@ void EditarFuncionario(int *contadorFuncionario, struct Funcionario *funcionario
     scanf("%d",&indiceTroca);
     for(int i = 0; i < (*contadorFuncionario); i++){
         if (funcionario[i].ID == indiceTroca){
+            printf("\nIndice: %d\n",funcionario[i].ID);
+            printf("Nome: %s\n",funcionario[i].Nome);
+            if (funcionario[i].Turno==1){
+                printf("Turno: Matutino\n");
+            }
+            if (funcionario[i].Turno==2){
+                printf("Turno: Vespertino\n");
+            }
+            if (funcionario[i].Turno==3){
+                printf("Turno: Noturno\n");
+            }
+            if (funcionario[i].Turno!=1 && funcionario[i].Turno!=2 && funcionario[i].Turno!=3){
+                printf("Turno: Nao encontrado\n");
+            }
+            printf("Funcao: %s\n",funcionario[i].Funcao);
+
             //Nome  
-            printf("Digite o nome do Funcionario: ");
+            printf("\nDigite o nome do Funcionario: ");
             fflush(stdin);
             gets(funcionario[indiceTroca-1].Nome);       
             
