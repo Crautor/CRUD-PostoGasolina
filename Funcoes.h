@@ -168,9 +168,7 @@ void DeletarFuncionario(int *contadorFuncionario, struct Funcionario *funcionari
             else{
                 funcionario = (struct Funcionario*) realloc (funcionario,*contadorFuncionario * sizeof(struct Funcionario));
             }
-            for (int j = 0; j < (*contadorFuncionario); j++){
 
-            }
             
         }
     }
