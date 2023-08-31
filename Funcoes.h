@@ -149,7 +149,7 @@ void DeletarFuncionario(int *contadorFuncionario, struct Funcionario *funcionari
         printf("Funcao: %s\n",funcionario[i].Funcao);
     }
     int indiceDelete;
-    struct Funcionario aux;
+
     printf("\ninforme qual o indice do funcionario que deseja excluir: ");
     scanf("%d",&indiceDelete);
     for(int i = 0; i < (*contadorFuncionario); i++){
