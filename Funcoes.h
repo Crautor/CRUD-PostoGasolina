@@ -3,12 +3,11 @@
 #include <stdlib.h>
 
 void CadastrarFuncionario(int *contadorFuncionario, struct Funcionario *funcionario){
-  
-   if (*contadorFuncionario>1)
-   {
-    funcionario = (struct Funcionario*) realloc (funcionario,*contadorFuncionario * sizeof(struct Funcionario));
+
+    if(*contadorFuncionario>1){
+        funcionario = (struct Funcionario*) realloc (funcionario,*contadorFuncionario * sizeof(struct Funcionario));  
+    }
     
-   }
    
     funcionario[*contadorFuncionario].ID = *contadorFuncionario + 1;
    
@@ -31,6 +30,12 @@ void CadastrarFuncionario(int *contadorFuncionario, struct Funcionario *funciona
 }
 
 void ExibirFuncionario(int *contadorFuncionario, struct Funcionario *funcionario){
+    if((*contadorFuncionario)==0){
+        printf("\n============================================\n");
+        printf("NAO TEM FUNCIONARIOS CADASTRADOS NO MOMENTO\n");
+        printf("============================================\n");
+        return;
+    }
     for (int i = 0; i < (*contadorFuncionario); i++){
         printf("\nIndice: %d\n",funcionario[i].ID);
         printf("Nome: %s\n",funcionario[i].Nome);
@@ -52,6 +57,12 @@ void ExibirFuncionario(int *contadorFuncionario, struct Funcionario *funcionario
 }
 
 void EditarFuncionario(int *contadorFuncionario, struct Funcionario *funcionario){
+    if((*contadorFuncionario)==0){
+        printf("\n============================================\n");
+        printf("NAO TEM FUNCIONARIOS CADASTRADOS NO MOMENTO\n");
+        printf("============================================\n");
+        return;
+    }
     int indiceTroca = 0;
     // exibe todos que tem ate o momento
     for (int i = 0; i < (*contadorFuncionario); i++){
@@ -111,6 +122,66 @@ void EditarFuncionario(int *contadorFuncionario, struct Funcionario *funcionario
     }
     printf("Alteracao realizada.\n");
 }
+
+void DeletarFuncionario(int *contadorFuncionario, struct Funcionario *funcionario){
+    if((*contadorFuncionario)==0){
+        printf("\n============================================\n");
+        printf("NAO TEM FUNCIONARIOS CADASTRADOS NO MOMENTO\n");
+        printf("============================================\n");
+        return;
+    }
+    //exibir
+    for (int i = 0; i < (*contadorFuncionario); i++){
+        printf("\nIndice: %d\n",funcionario[i].ID);
+        printf("Nome: %s\n",funcionario[i].Nome);
+        if (funcionario[i].Turno==1){
+            printf("Turno: Matutino\n");
+        }
+        if (funcionario[i].Turno==2){
+            printf("Turno: Vespertino\n");
+        }
+        if (funcionario[i].Turno==3){
+            printf("Turno: Noturno\n");
+        }
+        if (funcionario[i].Turno!=1 && funcionario[i].Turno!=2 && funcionario[i].Turno!=3){
+            printf("Turno: Nao encontrado\n");
+        }
+        printf("Funcao: %s\n",funcionario[i].Funcao);
+    }
+    int indiceDelete;
+    struct Funcionario aux;
+    printf("\ninforme qual o indice do funcionario que deseja excluir: ");
+    scanf("%d",&indiceDelete);
+    for(int i = 0; i < (*contadorFuncionario); i++){
+        if (funcionario[i].ID == indiceDelete){
+            
+            funcionario[i]= funcionario[*contadorFuncionario-1];
+            funcionario[i].ID = i+1;
+            
+            // tirar 1 do contador
+            (*contadorFuncionario)--;
+            
+            //caso delete e so tenha 1 cadastrado
+            if (*contadorFuncionario==0){
+              //n faz nada se não buga  
+            }
+            else{
+                funcionario = (struct Funcionario*) realloc (funcionario,*contadorFuncionario * sizeof(struct Funcionario));
+            }
+            for (int j = 0; j < (*contadorFuncionario); j++){
+
+            }
+            
+        }
+    }
+}
+
+
+
+
+
+
+
 void Continuar(int *continuar){
     printf("\nDeseja Continuar?\n");
     printf("============================================\n");

@@ -7,7 +7,7 @@ int main(){
     int escolha=0, contFunci=0, continuar=0;
     // struct Funcionario funcionario;
     struct Funcionario *funcionario;
-    funcionario = (struct Funcionario*) malloc (contFunci * sizeof(struct Funcionario));
+    funcionario = (struct Funcionario*) malloc (1 * sizeof(struct Funcionario));
     if (funcionario==NULL){
         exit(1);
     }
@@ -28,9 +28,11 @@ int main(){
                     EditarFuncionario(&contFunci,funcionario);
                 }
                 
-                if (escolha==3)
-                {
+                if (escolha==3){
                     ExibirFuncionario(&contFunci,funcionario);
+                }
+                if (escolha==4){
+                    DeletarFuncionario(&contFunci,funcionario);
                 }
                 
             } while (escolha!=5);
