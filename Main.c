@@ -4,11 +4,16 @@
 
 
 int main(){
-    int escolha=0, contFunci=0, continuar=0;
+    int escolha=0, contFunci=0, continuar=0, contBombaCombustivel = 0;
     // struct Funcionario funcionario;
     struct Funcionario *funcionario;
     funcionario = (struct Funcionario*) malloc (1 * sizeof(struct Funcionario));
     if (funcionario==NULL){
+        exit(1);
+    }
+    struct BombaCombustivel *BombaCombustivel;
+    BombaCombustivel = (struct BombaCombustivel*) malloc (1 * sizeof(struct BombaCombustivel));
+    if (BombaCombustivel==NULL){
         exit(1);
     }
     
@@ -16,6 +21,7 @@ int main(){
     do{
         if (escolha==1){
             do{
+                //Funcionario
                 MenuFuncionarios(&escolha);
                 if (escolha==1){
                     do{
@@ -36,7 +42,28 @@ int main(){
                 }
                 
             } while (escolha!=5);
-
+        }
+        if (escolha == 3){
+            //Combustivel
+            do{
+                MenuBombaCombustivel(&escolha);
+                if (escolha==1){
+                    do{
+                        CadastrarBombaCombustivel(&contBombaCombustivel,BombaCombustivel);
+                        contBombaCombustivel++;
+                        Continuar(&continuar);
+                    } while (continuar==1);
+                }
+                if (escolha==2){
+                    EditarBombaCombustivel(&contBombaCombustivel,BombaCombustivel);
+                }               
+                if (escolha==3){
+                    ExibirBombaCombustivel(&contBombaCombustivel,BombaCombustivel);
+                }
+                if (escolha==4){
+                    DeletarBombaCombustivel(&contBombaCombustivel,BombaCombustivel);
+                }             
+            } while (escolha!=5);
         }
         if (escolha != 4){
             MenuPrincipal(&escolha);
