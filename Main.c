@@ -11,9 +11,9 @@ int main(){
     if (funcionario==NULL){
         exit(1);
     }
-    struct BombaCombustivel *BombaCombustivel;
-    BombaCombustivel = (struct BombaCombustivel*) malloc (1 * sizeof(struct BombaCombustivel));
-    if (BombaCombustivel==NULL){
+    struct BombaCombustivel *bombaCombustivel;
+    bombaCombustivel = (struct BombaCombustivel*) malloc (1 * sizeof(struct BombaCombustivel));
+    if (bombaCombustivel==NULL){
         exit(1);
     }
     
@@ -49,19 +49,19 @@ int main(){
                 MenuBombaCombustivel(&escolha);
                 if (escolha==1){
                     do{
-                        CadastrarBombaCombustivel(&contBombaCombustivel,BombaCombustivel);
+                        CadastrarBombaCombustivel(&contBombaCombustivel,bombaCombustivel);
                         contBombaCombustivel++;
                         Continuar(&continuar);
                     } while (continuar==1);
                 }
                 if (escolha==2){
-                    EditarBombaCombustivel(&contBombaCombustivel,BombaCombustivel);
+                    EditarBombaCombustivel(&contBombaCombustivel,bombaCombustivel);
                 }               
                 if (escolha==3){
-                    ExibirBombaCombustivel(&contBombaCombustivel,BombaCombustivel);
+                    ExibirBombaCombustivel(&contBombaCombustivel,bombaCombustivel);
                 }
                 if (escolha==4){
-                    DeletarBombaCombustivel(&contBombaCombustivel,BombaCombustivel);
+                    DeletarBombaCombustivel(&contBombaCombustivel,bombaCombustivel);
                 }             
             } while (escolha!=5);
         }
@@ -72,4 +72,5 @@ int main(){
     } while (escolha!=4);
 
     free(funcionario);
+    free(bombaCombustivel);
 }
