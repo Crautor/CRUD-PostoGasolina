@@ -4,7 +4,7 @@
 
 
 int main(){
-    int escolha=0, contFunci=0, continuar=0, contBombaCombustivel = 0;
+    int escolha=0, contFunci=0, continuar=0, contBombaCombustivel = 0, contProduto = 0;
     // struct Funcionario funcionario;
     struct Funcionario *funcionario;
     funcionario = (struct Funcionario*) malloc (1 * sizeof(struct Funcionario));
@@ -16,9 +16,15 @@ int main(){
     if (bombaCombustivel==NULL){
         exit(1);
     }
+    struct Estoque *estoque;
+    estoque = (struct Estoque*) malloc (1 * sizeof(struct Estoque));
+    if (estoque==NULL){
+        exit(1);
+    }
     
     MenuPrincipal(&escolha);
     do{
+        
         if (escolha==1){
             do{
                 //Funcionario
@@ -42,6 +48,43 @@ int main(){
                 }
                 
             } while (escolha!=5);
+        }
+        if (escolha == 2){
+            //Produtos
+            do{
+                //estoque
+                if (escolha==1){
+                    if (escolha==1){
+                        do
+                        {
+                            
+                        
+                            MenuEstoque(&escolha);
+                            if (escolha==1){
+                                do{
+                                    CadastrarProduto(&contProduto,estoque);
+                                    contProduto++;
+                                    Continuar(&continuar);
+                                } while (continuar==1);
+                            }
+                            if (escolha==2){
+                                EditarProduto(&contProduto,estoque);
+                            }
+                            if (escolha==3){
+                                ExibirProduto(&contProduto,estoque);
+                            }
+                            if (escolha==4){
+                                DeletarProduto(&contProduto,estoque);
+                            }
+                        } while (escolha != 5);
+                    }
+                }
+                //venda
+                if (escolha==2){
+                    
+                }                          
+                MenuProdutos(&escolha);
+            } while (escolha!=0);
         }
         if (escolha == 3){
             //Combustivel
@@ -73,4 +116,5 @@ int main(){
 
     free(funcionario);
     free(bombaCombustivel);
+    free(estoque);
 }

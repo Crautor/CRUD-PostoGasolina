@@ -10,3 +10,10 @@ struct BombaCombustivel{
     char Nome[50];
     int Combustivel;
 };
+
+struct Estoque{
+    int ID;
+    char Nome[50];
+    int Qntd;
+    float Preco;
+};

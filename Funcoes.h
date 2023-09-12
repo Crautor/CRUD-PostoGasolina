@@ -18,7 +18,7 @@ void CadastrarFuncionario(int *contadorFuncionario, struct Funcionario *funciona
     
     //Turno
     printf("TURNOS: \n1 - Matutino\n2 - Vespertino\n3 - Noturno\n");
-    printf("informe o Turno de Trabalho:");
+    printf("Informe o Turno de Trabalho:");
     scanf("%i",&funcionario[*contadorFuncionario].Turno);
     
     //Função
@@ -110,7 +110,7 @@ void EditarFuncionario(int *contadorFuncionario, struct Funcionario *funcionario
             
             //Turno
             printf("TURNOS: \n1 - Matutino\n2 - Vespertino\n3 - Noturno\n");
-            printf("informe o Turno de Trabalho:");
+            printf("Informe o Turno de Trabalho:");
             scanf("%i",&funcionario[indiceTroca-1].Turno);
             
             //Função
@@ -167,6 +167,134 @@ void DeletarFuncionario(int *contadorFuncionario, struct Funcionario *funcionari
             }
             else{
                 funcionario = (struct Funcionario*) realloc (funcionario,*contadorFuncionario * sizeof(struct Funcionario));
+            }
+
+            
+        }
+    }
+}
+
+void CadastrarProduto(int *contadorestoque, struct Estoque *estoque){
+
+    if(*contadorestoque>1){
+        estoque = (struct Estoque*) realloc (estoque,*contadorestoque * sizeof(struct Estoque));  
+    }
+    
+   
+    estoque[*contadorestoque].ID = *contadorestoque + 1;
+   
+    //Nome  
+    printf("Digite o nome do estoque: ");
+    fflush(stdin);
+    gets(estoque[*contadorestoque].Nome);       
+    
+    //Qntd
+    printf("Informe a quantidade do produto:");
+    scanf("%i",&estoque[*contadorestoque].Qntd);
+    
+    //Preco
+    printf("Informe o preco do produto:\n(ex: 1.99)");
+    scanf("%f",&estoque[*contadorestoque].Preco);
+    
+     
+      
+
+}
+
+void ExibirProduto(int *contadorestoque, struct Estoque *estoque){
+    if((*contadorestoque)==0){
+        printf("\n============================================\n");
+        printf("NAO TEM PRODUTOS CADASTRADOS NO MOMENTO\n");
+        printf("============================================\n");
+        return;
+    }
+    for (int i = 0; i < (*contadorestoque); i++){
+        printf("\nIndice: %d\n",estoque[i].ID);
+        printf("Nome: %s\n",estoque[i].Nome);
+        printf("Quantidade: %i\n",estoque[i].Qntd);
+        printf("Preco: R$ %.2f\n",estoque[i].Preco);
+    }
+    
+}
+
+void EditarProduto(int *contadorestoque, struct Estoque *estoque){
+    if((*contadorestoque)==0){
+        printf("\n============================================\n");
+        printf("NAO TEM PRODUTOS CADASTRADOS NO MOMENTO\n");
+        printf("============================================\n");
+        return;
+    }
+    int indiceTroca = 0;
+    // exibe todos que tem ate o momento
+    for (int i = 0; i < (*contadorestoque); i++){
+        printf("\nIndice: %d\n",estoque[i].ID);
+        printf("Nome: %s\n",estoque[i].Nome);
+        printf("Quantidade: %i\n",estoque[i].Qntd);
+        printf("Preco: R$ %.2f\n",estoque[i].Preco);
+    }
+    //pede qual quer alterar
+    printf("\ninforme qual o indice do estoque que deseja editar: ");
+    scanf("%d",&indiceTroca);
+    for(int i = 0; i < (*contadorestoque); i++){
+        if (estoque[i].ID == indiceTroca){
+            printf("\nIndice: %d\n",estoque[indiceTroca-1].ID);
+            printf("Nome: %s\n",estoque[indiceTroca-1].Nome);
+            printf("Quantidade: %i\n",estoque[indiceTroca-1].Qntd);
+            printf("Preco: R$ %.2f\n",estoque[indiceTroca-1].Preco);
+
+            //Nome  
+            printf("\nDigite o nome do estoque: ");
+            fflush(stdin);
+            gets(estoque[indiceTroca-1].Nome);       
+            
+            //Qntd
+            printf("Informe a quantidade do produto:");
+            scanf("%i",&estoque[indiceTroca-1].Qntd);
+            
+            //Preco
+            printf("Informe o preco do produto: \n(ex: 1.99)");
+            scanf("%f",&estoque[indiceTroca-1].Preco);
+            
+             
+        
+        }
+    }
+    printf("Alteracao realizada.\n");
+}
+
+void DeletarProduto(int *contadorestoque, struct Estoque *estoque){
+    if((*contadorestoque)==0){
+        printf("\n============================================\n");
+        printf("NAO TEM PRODUTOS CADASTRADOS NO MOMENTO\n");
+        printf("============================================\n");
+        return;
+    }
+    //exibir
+    for (int i = 0; i < (*contadorestoque); i++){
+        printf("\nIndice: %d\n",estoque[i].ID);
+        printf("Nome: %s\n",estoque[i].Nome);
+        printf("Quantidade: %i\n",estoque[i].Qntd);
+        printf("Preco: R$ %.2f\n",estoque[i].Preco);
+    }
+    int indiceDelete;
+
+    printf("\ninforme qual o indice do estoque que deseja excluir: ");
+    scanf("%d",&indiceDelete);
+    for(int i = 0; i < (*contadorestoque); i++){
+        if (estoque[i].ID == indiceDelete){
+            
+            estoque[i]= estoque[*contadorestoque-1];
+            estoque[i].ID = i+1;
+            
+            // tirar 1 do contador
+            (*contadorestoque)--;
+            
+            //caso delete e so tenha 1 cadastrado
+            if (*contadorestoque==0){
+              //n faz nada se não buga  
+            }
+            else{
+                estoque = (struct Estoque*) realloc (estoque,*contadorestoque * sizeof(struct Estoque));
             }
 
             
@@ -390,6 +518,30 @@ void MenuBombaCombustivel(int *escolha){
     printf("2 - Editar Bombas\n");
     printf("3 - Exibir Bombas Cadastrados\n");
     printf("4 - Deletar Bomba \n");
+    printf("5 - Voltar\n");
+    printf("============================================\n");
+    printf("Escolha uma das alternativas acima: ");
+    scanf("%i", escolha);
+}
+
+void MenuProdutos(int *escolha){
+    printf("\nMENU PRODUTOS\n");
+    printf("============================================\n");
+    printf("1 - Estoque\n");
+    printf("2 - Venda\n");
+    printf("0 - Voltar\n");
+    printf("============================================\n");
+    printf("Escolha uma das alternativas acima: ");
+    scanf("%i", escolha);
+}
+
+void MenuEstoque(int *escolha){
+    printf("\nMENU ESTOQUE\n");
+    printf("============================================\n");
+    printf("1 - Cadastrar Produto\n");
+    printf("2 - Editar Produtos\n");
+    printf("3 - Exibir Produtos\n");
+    printf("4 - Deletar Produto\n");
     printf("5 - Voltar\n");
     printf("============================================\n");
     printf("Escolha uma das alternativas acima: ");
