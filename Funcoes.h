@@ -187,11 +187,11 @@ void CadastrarProduto(int *contadorestoque, struct Estoque *estoque){
     printf("Digite o nome do estoque: ");
     fflush(stdin);
     gets(estoque[*contadorestoque].Nome);       
-    
+    fflush(stdin);
     //Qntd
     printf("Informe a quantidade do produto:");
     scanf("%i",&estoque[*contadorestoque].Qntd);
-    
+    fflush(stdin);
     //Preco
     printf("Informe o preco do produto:\n(ex: 1.99)");
     scanf("%f",&estoque[*contadorestoque].Preco);
@@ -313,7 +313,7 @@ void CadastrarBombaCombustivel(int *contadorBombaCombustivel, struct BombaCombus
     BombaCombustivel[*contadorBombaCombustivel].ID = *contadorBombaCombustivel + 1;
    
     //Nome  
-    printf("Digite o nome do Funcionario: ");
+    printf("Digite o nome do Bomba: ");
     fflush(stdin);
     gets(BombaCombustivel[*contadorBombaCombustivel].Nome);       
     
@@ -471,11 +471,45 @@ void DeletarBombaCombustivel(int *contadorBombaCombustivel, struct BombaCombusti
     }
 }
 
-
-
-
-
-
+void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *valorFinal){
+    int indiceProduto, qntcompra, continuar;
+    if((*contadorestoque)==0){
+        printf("\n============================================\n");
+        printf("NAO TEM PRODUTOS CADASTRADOS NO MOMENTO\n");
+        printf("============================================\n");
+        return;
+    }
+    do{
+        for (int i = 0; i < (*contadorestoque); i++){
+            printf("\nIndice: %d\n",estoque[i].ID);
+            printf("Nome: %s\n",estoque[i].Nome);
+            printf("Quantidade: %i\n",estoque[i].Qntd);
+            printf("Preco: R$ %.2f\n",estoque[i].Preco);
+        }
+        printf("\nInforme o Indice do Produto que deseja adicionar ao carrinho: ");
+        scanf("%i",&indiceProduto);
+        printf("\nInforme a Quantidade do Produto que voce deseja comprar: ");
+        scanf("%i",&qntcompra);
+        for(int i = 0; i < (*contadorestoque); i++){
+            if (estoque[i].ID == indiceProduto){
+                if (estoque[indiceProduto-1].Qntd>=qntcompra){
+                    *valorFinal = (*valorFinal)+(estoque[indiceProduto-1].Preco*qntcompra);
+                    estoque[indiceProduto-1].Qntd = estoque[indiceProduto-1].Qntd - qntcompra;
+                }
+                else{
+                    printf("\nSem itens suficientes do produto no estoque\n");
+                }       
+            }
+        }
+        printf("\nValor total ate o momento: %.2f",(*valorFinal));    
+        printf("\nDeseja Continuar?\n");
+        printf("============================================\n");
+        printf("1 - Sim\n");
+        printf("2 - Nao\n");
+        printf("============================================\n");
+        scanf("%d",&continuar);
+    }while(continuar!=2);
+}
 
 void Continuar(int *continuar){
     printf("\nDeseja Continuar?\n");
@@ -542,6 +576,19 @@ void MenuEstoque(int *escolha){
     printf("2 - Editar Produtos\n");
     printf("3 - Exibir Produtos\n");
     printf("4 - Deletar Produto\n");
+    printf("5 - Voltar\n");
+    printf("============================================\n");
+    printf("Escolha uma das alternativas acima: ");
+    scanf("%i", escolha);
+}
+
+void MenuVendas(int *escolha){
+    printf("\nMENU VENDAS\n");
+    printf("============================================\n");
+    printf("1 - Adicionar ao Carrinho\n");
+    printf("2 - Editar Carrinho\n");
+    printf("3 - Exibir Carrinho\n");
+    printf("4 - Finalizar Compra\n");
     printf("5 - Voltar\n");
     printf("============================================\n");
     printf("Escolha uma das alternativas acima: ");

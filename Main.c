@@ -5,6 +5,7 @@
 
 int main(){
     int escolha=0, contFunci=0, continuar=0, contBombaCombustivel = 0, contProduto = 0;
+    float valorTotal=0;
     // struct Funcionario funcionario;
     struct Funcionario *funcionario;
     funcionario = (struct Funcionario*) malloc (1 * sizeof(struct Funcionario));
@@ -21,10 +22,8 @@ int main(){
     if (estoque==NULL){
         exit(1);
     }
-    
     MenuPrincipal(&escolha);
     do{
-        
         if (escolha==1){
             do{
                 //Funcionario
@@ -39,26 +38,23 @@ int main(){
                 if (escolha==2){
                     EditarFuncionario(&contFunci,funcionario);
                 }
-                
                 if (escolha==3){
                     ExibirFuncionario(&contFunci,funcionario);
                 }
                 if (escolha==4){
                     DeletarFuncionario(&contFunci,funcionario);
                 }
-                
             } while (escolha!=5);
         }
         if (escolha == 2){
             //Produtos
             do{
                 //estoque
+                MenuProdutos(&escolha);
                 if (escolha==1){
                     if (escolha==1){
                         do
                         {
-                            
-                        
                             MenuEstoque(&escolha);
                             if (escolha==1){
                                 do{
@@ -81,9 +77,14 @@ int main(){
                 }
                 //venda
                 if (escolha==2){
-                    
+                    do
+                    {
+                        MenuVendas(&escolha);
+                        if (escolha == 1){
+                            AdicionarCarrinho(&contProduto,estoque,&valorTotal);
+                        }                       
+                    } while (escolha!=5);
                 }                          
-                MenuProdutos(&escolha);
             } while (escolha!=0);
         }
         if (escolha == 3){
