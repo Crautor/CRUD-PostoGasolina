@@ -496,11 +496,6 @@ void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *val
         for(int i = 0; i < (*contadorestoque); i++){
             if (estoque[i].ID == indiceProduto){
                 if (estoque[indiceProduto-1].Qntd>=qntcompra){
-                    // *contadorCarrinho = (*contadorCarrinho) + 1;
-                    // carrinho[(*contadorCarrinho)-1].ID = (*contadorCarrinho);
-                    // // carrinho[(*contadorCarrinho)-1].Nome = estoque[indiceProduto-1].Nome;
-                    // carrinho[(*contadorCarrinho)-1].Qntd = qntcompra;
-                    // carrinho[(*contadorCarrinho)-1].Preco = estoque[indiceProduto-1].Preco*qntcompra;
 
                     
                     *valorFinal = (*valorFinal)+(estoque[indiceProduto-1].Preco*qntcompra);
@@ -654,5 +649,10 @@ void MenuVendas(int *escolha){
 //         *valorFinal= (*valorFinal)+ (carrinho[i].Preco*carrinho[i].Qntd);
 //     }
 //     printf("\nValor total: %.2f",(*valorFinal));    
-    
 // }
+    
+                    // *contadorCarrinho = (*contadorCarrinho) + 1;
+                    // carrinho[(*contadorCarrinho)-1].ID = (*contadorCarrinho);
+                    // // carrinho[(*contadorCarrinho)-1].Nome = estoque[indiceProduto-1].Nome;
+                    // carrinho[(*contadorCarrinho)-1].Qntd = qntcompra;
+                    // carrinho[(*contadorCarrinho)-1].Preco = estoque[indiceProduto-1].Preco*qntcompra;
