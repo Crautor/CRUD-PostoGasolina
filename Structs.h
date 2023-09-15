@@ -17,10 +17,3 @@ struct Estoque{
     int Qntd;
     float Preco;
 };
-struct Carrinho{
-    int ID;
-    char Cliente[50];
-    char Nome[50];
-    int Qntd;
-    float Preco;
-};

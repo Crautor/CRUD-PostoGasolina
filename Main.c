@@ -4,7 +4,7 @@
 
 
 int main(){
-    int escolha=0, contFunci=0, continuar=0, contBombaCombustivel = 0, contProduto = 0;
+    int escolha=0, contFunci=0, continuar=0, contBombaCombustivel = 0, contProduto = 0, contCarrinho=0;
     float valorTotal=0;
     // struct Funcionario funcionario;
     struct Funcionario *funcionario;
@@ -20,6 +20,11 @@ int main(){
     struct Estoque *estoque;
     estoque = (struct Estoque*) malloc (1 * sizeof(struct Estoque));
     if (estoque==NULL){
+        exit(1);
+    }
+    struct Estoque *carrinho;
+    carrinho = (struct Estoque*) malloc (1 * sizeof(struct Estoque));
+    if (carrinho==NULL){
         exit(1);
     }
     MenuPrincipal(&escolha);
@@ -81,9 +86,19 @@ int main(){
                     {
                         MenuVendas(&escolha);
                         if (escolha == 1){
-                            AdicionarCarrinho(&contProduto,estoque,&valorTotal);
+                            AdicionarCarrinho(&contProduto,estoque,&valorTotal,carrinho,&contCarrinho);
                         }                       
-                    } while (escolha!=5);
+                        // if (escolha == 3){
+                        //     ExibirCarrinho(&valorTotal,carrinho,&contCarrinho);
+                        // }
+                        if (escolha==2){
+                            Abastecer(&valorTotal);
+                        }
+                        if (escolha==3){
+                            FinalizarCompra(&valorTotal);
+                        }
+                                               
+                    } while (escolha!=4);
                 }                          
             } while (escolha!=0);
         }

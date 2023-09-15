@@ -318,7 +318,7 @@ void CadastrarBombaCombustivel(int *contadorBombaCombustivel, struct BombaCombus
     gets(BombaCombustivel[*contadorBombaCombustivel].Nome);       
     
     //Combustivel
-    printf("Combustivel: \n1 - Gasolina\n2 - Gasolina Aditivada\n3 - Alcool\n4 - Diesel\n");
+    printf("\nCombustivel: \n1 - Gasolina: R$ 5.00\n2 - Gasolina Aditivada: R$ 5.30\n3 - Alcool: R$ 3.70\n4 - Diesel: R$ 6.18\n");
     printf("Informe o tipo de combustivel:");
     scanf("%i",&BombaCombustivel[*contadorBombaCombustivel].Combustivel);  
 
@@ -471,7 +471,7 @@ void DeletarBombaCombustivel(int *contadorBombaCombustivel, struct BombaCombusti
     }
 }
 
-void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *valorFinal){
+void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *valorFinal, struct Estoque *carrinho, int *contadorCarrinho){
     int indiceProduto, qntcompra, continuar;
     if((*contadorestoque)==0){
         printf("\n============================================\n");
@@ -480,6 +480,9 @@ void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *val
         return;
     }
     do{
+        if(*contadorCarrinho>1){
+            carrinho = (struct Estoque*) realloc (carrinho,*contadorCarrinho * sizeof(struct Estoque));  
+        }
         for (int i = 0; i < (*contadorestoque); i++){
             printf("\nIndice: %d\n",estoque[i].ID);
             printf("Nome: %s\n",estoque[i].Nome);
@@ -493,6 +496,13 @@ void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *val
         for(int i = 0; i < (*contadorestoque); i++){
             if (estoque[i].ID == indiceProduto){
                 if (estoque[indiceProduto-1].Qntd>=qntcompra){
+                    // *contadorCarrinho = (*contadorCarrinho) + 1;
+                    // carrinho[(*contadorCarrinho)-1].ID = (*contadorCarrinho);
+                    // // carrinho[(*contadorCarrinho)-1].Nome = estoque[indiceProduto-1].Nome;
+                    // carrinho[(*contadorCarrinho)-1].Qntd = qntcompra;
+                    // carrinho[(*contadorCarrinho)-1].Preco = estoque[indiceProduto-1].Preco*qntcompra;
+
+                    
                     *valorFinal = (*valorFinal)+(estoque[indiceProduto-1].Preco*qntcompra);
                     estoque[indiceProduto-1].Qntd = estoque[indiceProduto-1].Qntd - qntcompra;
                 }
@@ -500,8 +510,7 @@ void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *val
                     printf("\nSem itens suficientes do produto no estoque\n");
                 }       
             }
-        }
-        printf("\nValor total ate o momento: %.2f",(*valorFinal));    
+        }  
         printf("\nDeseja Continuar?\n");
         printf("============================================\n");
         printf("1 - Sim\n");
@@ -510,6 +519,58 @@ void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *val
         scanf("%d",&continuar);
     }while(continuar!=2);
 }
+
+void Abastecer(float *valorFinal){
+    int combustivelUsado=0;
+    float litros=0;
+    const float valorGasolina=5.0,valorGasolinaAditivada=5.30,valorAlcool=3.70,valorDiesel=6.18;
+    printf("\nCombustivel: \n1 - Gasolina: R$ 5.00\n2 - Gasolina Aditivada: R$ 5.30\n3 - Alcool: R$ 3.70\n4 - Diesel: R$ 6.18\n");
+    printf("Informe o combustivel utilizado: ");
+    scanf("%d",&combustivelUsado);
+    printf("Informe a quantidade de litros abastecido: ");
+    scanf("%f",&litros);
+    if (combustivelUsado==1){
+        *valorFinal=(*valorFinal)+(litros*valorGasolina);    
+        
+    }
+    if (combustivelUsado==2){
+
+        *valorFinal=(*valorFinal)+(litros*valorGasolinaAditivada);    
+    }
+    if (combustivelUsado==3){
+
+        *valorFinal=(*valorFinal)+(litros*valorAlcool);    
+    }
+    if (combustivelUsado==4){
+        *valorFinal=(*valorFinal)+(litros*valorDiesel);    
+
+    }
+    if (combustivelUsado!=1 && combustivelUsado!=2 && combustivelUsado!=3 && combustivelUsado != 4){
+        printf("Combustivel nao encontrado\n");
+    }
+} 
+
+void FinalizarCompra(float *valorfinal){
+    printf("\nVALOR TOTAL A PAGAR: R$ %.2f\n",(*valorfinal));
+}
+// void ExibirCarrinho(float *valorFinal, struct Estoque *carrinho, int *contadorCarrinho){
+//     if((*contadorCarrinho)==0){
+//         printf("\n============================================\n");
+//         printf("NAO TEM PRODUTOS CADASTRADOS NO MOMENTO\n");
+//         printf("============================================\n");
+//         return;
+//     } 
+//     *valorFinal=0;     
+//     for (int i = 0; i < (*contadorCarrinho); i++){
+//         printf("\nIndice: %d\n",carrinho[i].ID);
+//         printf("Nome: %s\n",carrinho[i].Nome);
+//         printf("Quantidade: %i\n",carrinho[i].Qntd);
+//         printf("Preco: R$ %.2f\n",carrinho[i].Preco);
+//         *valorFinal= (*valorFinal)+ (carrinho[i].Preco*carrinho[i].Qntd);
+//     }
+//     printf("\nValor total: %.2f",(*valorFinal));    
+    
+// }
 
 void Continuar(int *continuar){
     printf("\nDeseja Continuar?\n");
@@ -586,10 +647,11 @@ void MenuVendas(int *escolha){
     printf("\nMENU VENDAS\n");
     printf("============================================\n");
     printf("1 - Adicionar ao Carrinho\n");
-    printf("2 - Editar Carrinho\n");
-    printf("3 - Exibir Carrinho\n");
-    printf("4 - Finalizar Compra\n");
-    printf("5 - Voltar\n");
+    // printf("2 - Editar Carrinho\n");
+    // printf("3 - Exibir Carrinho\n");
+    printf("2 - Abastecer\n");
+    printf("3 - Finalizar Compra\n");
+    printf("4 - Voltar\n");
     printf("============================================\n");
     printf("Escolha uma das alternativas acima: ");
     scanf("%i", escolha);
