@@ -553,24 +553,6 @@ void Abastecer(float *valorFinal){
 void FinalizarCompra(float *valorfinal){
     printf("\nVALOR TOTAL A PAGAR: R$ %.2f\n",(*valorfinal));
 }
-// void ExibirCarrinho(float *valorFinal, struct Estoque *carrinho, int *contadorCarrinho){
-//     if((*contadorCarrinho)==0){
-//         printf("\n============================================\n");
-//         printf("NAO TEM PRODUTOS CADASTRADOS NO MOMENTO\n");
-//         printf("============================================\n");
-//         return;
-//     } 
-//     *valorFinal=0;     
-//     for (int i = 0; i < (*contadorCarrinho); i++){
-//         printf("\nIndice: %d\n",carrinho[i].ID);
-//         printf("Nome: %s\n",carrinho[i].Nome);
-//         printf("Quantidade: %i\n",carrinho[i].Qntd);
-//         printf("Preco: R$ %.2f\n",carrinho[i].Preco);
-//         *valorFinal= (*valorFinal)+ (carrinho[i].Preco*carrinho[i].Qntd);
-//     }
-//     printf("\nValor total: %.2f",(*valorFinal));    
-    
-// }
 
 void Continuar(int *continuar){
     printf("\nDeseja Continuar?\n");
@@ -656,3 +638,21 @@ void MenuVendas(int *escolha){
     printf("Escolha uma das alternativas acima: ");
     scanf("%i", escolha);
 }
+// void ExibirCarrinho(float *valorFinal, struct Estoque *carrinho, int *contadorCarrinho){
+//     if((*contadorCarrinho)==0){
+//         printf("\n============================================\n");
+//         printf("NAO TEM PRODUTOS CADASTRADOS NO MOMENTO\n");
+//         printf("============================================\n");
+//         return;
+//     } 
+//     *valorFinal=0;     
+//     for (int i = 0; i < (*contadorCarrinho); i++){
+//         printf("\nIndice: %d\n",carrinho[i].ID);
+//         printf("Nome: %s\n",carrinho[i].Nome);
+//         printf("Quantidade: %i\n",carrinho[i].Qntd);
+//         printf("Preco: R$ %.2f\n",carrinho[i].Preco);
+//         *valorFinal= (*valorFinal)+ (carrinho[i].Preco*carrinho[i].Qntd);
+//     }
+//     printf("\nValor total: %.2f",(*valorFinal));    
+    
+// }

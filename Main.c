@@ -6,7 +6,7 @@
 int main(){
     int escolha=0, contFunci=0, continuar=0, contBombaCombustivel = 0, contProduto = 0, contCarrinho=0;
     float valorTotal=0;
-    // struct Funcionario funcionario;
+
     struct Funcionario *funcionario;
     funcionario = (struct Funcionario*) malloc (1 * sizeof(struct Funcionario));
     if (funcionario==NULL){
@@ -88,9 +88,6 @@ int main(){
                         if (escolha == 1){
                             AdicionarCarrinho(&contProduto,estoque,&valorTotal,carrinho,&contCarrinho);
                         }                       
-                        // if (escolha == 3){
-                        //     ExibirCarrinho(&valorTotal,carrinho,&contCarrinho);
-                        // }
                         if (escolha==2){
                             Abastecer(&valorTotal);
                         }
