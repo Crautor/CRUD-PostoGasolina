@@ -168,7 +168,7 @@ void DeletarFuncionario(int *contadorFuncionario, struct Funcionario *funcionari
             else{
                 funcionario = (struct Funcionario*) realloc (funcionario,*contadorFuncionario * sizeof(struct Funcionario));
             }
-
+            
             
         }
     }
@@ -471,7 +471,7 @@ void DeletarBombaCombustivel(int *contadorBombaCombustivel, struct BombaCombusti
     }
 }
 
-void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *valorFinal, struct Estoque *carrinho, int *contadorCarrinho){
+void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *valorFinal){
     int indiceProduto, qntcompra, continuar;
     if((*contadorestoque)==0){
         printf("\n============================================\n");
@@ -480,9 +480,6 @@ void AdicionarCarrinho(int *contadorestoque, struct Estoque *estoque, float *val
         return;
     }
     do{
-        if(*contadorCarrinho>1){
-            carrinho = (struct Estoque*) realloc (carrinho,*contadorCarrinho * sizeof(struct Estoque));  
-        }
         for (int i = 0; i < (*contadorestoque); i++){
             printf("\nIndice: %d\n",estoque[i].ID);
             printf("Nome: %s\n",estoque[i].Nome);
@@ -547,6 +544,7 @@ void Abastecer(float *valorFinal){
 
 void FinalizarCompra(float *valorfinal){
     printf("\nVALOR TOTAL A PAGAR: R$ %.2f\n",(*valorfinal));
+    *valorfinal = 0;
 }
 
 void Continuar(int *continuar){
